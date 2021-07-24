@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <script src="js/xeogl.js"></script>
+    <script src="js/glTFModel.js"></script>
+</head>
+<body style="background-color: transparent;">
+
+    <script>
+        // Load the model
+        var scene = new xeogl.Scene({
+            transparent: true
+        });
+        xeogl.setDefaultScene(scene);
+        var model = new xeogl.GLTFModel({
+            src: "img/3dprinter.gltf",
+            position: [0, -10, 0],
+            rotation: [0, 0, 0],
+            scale: [2, 2, 2]
+        });
+        // Camera animation and user control
+        var camera = scene.camera;
+        camera.eye = [0, 15, 100];
+        var spinning = true;
+        scene.on("tick", function () { // Slowly orbit the camera
+            if (spinning) {
+                camera.orbitYaw(-0.05);
+            }
+        });
+        new xeogl.CameraControl();
+    </script>
+</body>
+</html>
